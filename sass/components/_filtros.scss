@@ -1,0 +1,218 @@
+/* Universales */
+.tienda-contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.titulo-tienda{
+    font-size: 4rem;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 4rem;
+}
+/* Fin de Universales */
+
+/* Materiales */
+
+.materiales{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.botones-tienda-materiales{
+    width: 100%;
+    background-color: rgb(255, 232, 248);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-family: "Oswald", sans-serif;
+    position: relative;
+    &::before{
+        transition: width .5s, height .3s .5s;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 0%;
+    }
+}
+.botones-tienda-materiales p{
+    margin-left: 1.5rem;
+}
+
+.texto-tienda{
+    z-index: 3;
+}
+
+.boton-tienda-oro{
+    border-radius: 2rem 0 0 0;
+    border: gold solid .1rem;
+    color: rgb(220, 132, 0);
+    &::before{
+        background-color: rgb(255, 188, 44);
+        border-radius: 2rem 0 0 0;
+        top: 0%;
+        right: 0%;
+    }
+    &:hover::before{
+        width: 100%;
+        height: 100%;
+    }
+}
+.boton-tienda-catalogo{
+    border-radius: 0 2rem 0 0;
+    border: rgb(255, 86, 114) solid .1rem;
+    color: rgb(197, 0, 214);
+    &::before{
+        background-color: rgb(255, 109, 243);
+        border-radius: 0 2rem 0 0;
+        top: 0%;
+        right: 0%;
+    }
+    &:hover::before{
+        width: 100%;
+        height: 100%;
+    }
+}
+.boton-tienda-plata{
+    border: rgb(162, 162, 162) solid .1rem;
+    color: rgb(146, 146, 146);
+    &::before{
+        top: 0%;
+        background-color: rgb(228, 228, 228);
+        right: 0%;
+    }
+    &:hover::before{
+        width: 100%;
+        height: 100%;
+    }
+}
+.tipo-activo{
+    &::before{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Fin de Materiales */
+
+/* Botones de Paginas */
+
+.paginas{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin-bottom: 2rem;
+}
+.botones-paginas{
+    display: flex;
+    align-items: center;
+    background-color: pink;
+    border: grey .1rem solid;
+    transition: .3s;
+    &:hover{
+        background-color: rgb(255, 154, 171);
+    }
+}
+.botones-paginas p{
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    font-size: 1.7rem;
+}
+
+/* Fin de Botones de Pagina */
+
+/* Filtro subcategorias */
+
+.filtro-subcategorias{
+    display: flex;
+    width: 70%;
+    justify-content: space-evenly;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    background-color: rgb(255, 93, 236);
+    padding: 2rem 0;
+    color: white;
+    border: .1rem solid rgb(255, 161, 176);
+}
+.filtro-subcategorias label{
+    font-size: 2rem;
+}
+.filtro-subcategorias select{
+    font-size: 1.6rem;
+    padding: .5rem 1rem;
+    background-color: rgb(213, 213, 213);
+    border: solid .1rem rgb(255, 0, 43);
+    outline: none;
+}
+
+/* Fin de filtro subcategorias */
+
+/* Productos */
+
+.productos-contenedor{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 3rem;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 3rem 0;
+    border-radius: 0 0 2rem 2rem;
+    margin-bottom: 4rem;
+    background-color: rgb(247, 247, 247);
+    border: .1rem solid rgb(182, 182, 182);
+}
+.medidas-opciones p{
+    margin: .5rem 0;
+}
+
+/* Fin de Productos */
+
+/* Media Queries */
+
+@media(max-width: 81.25em){
+    .productos-contenedor{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(max-width: 50em){
+    .botones-tienda-materiales{
+        flex-direction: column;
+        padding: 1.5rem 0;
+    }
+    .paginas{
+        width: 90%;
+    }
+    .filtro-subcategorias{
+        width: 90%;
+    }
+    .filtro-subcategorias label{
+        font-size: 1.8rem;
+    }
+    .productos-contenedor{
+        width: 90%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .materiales{
+        width: 90%;
+    }
+    .botones-tienda-materiales p{
+        margin: 0;
+    }
+}
+
+@media(max-width: 31.25em){
+    .productos-contenedor{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* Fin de Media Queries */

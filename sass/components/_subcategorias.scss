@@ -1,0 +1,60 @@
+.boton-crear-contenedor{
+    background-color: rgb(255, 255, 255);
+    border-bottom: .1rem solid rgb(202, 202, 202);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.boton-crear{
+    font-size: 2rem;
+    padding: .5rem 1rem;
+    background-color: rgb(255, 234, 238);
+    border: .1rem solid rgb(255, 139, 159);
+    transition: .3s;
+    &:hover{
+        color: white;
+        background-color: rgb(255, 117, 140);
+    }
+}
+.subcategoria-contenedor{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border: .1rem rgb(204, 204, 204) solid;
+    margin: 1rem 0;
+    padding: 0 1rem;
+}
+.datos-subcategoria{
+    display: flex;
+    align-items: center;
+}
+.datos-subcategoria h3{
+    font-family: "Oswald", sans-serif;
+    margin-right: 1rem;
+}
+.datos-subcategoria p{
+    font-family: "Roboto", sans-serif;
+}
+.datos-subcategoria p span{
+    font-weight: 700;
+}
+.btn-subcategorias{
+    border-radius: 0 !important;
+    box-shadow: none;
+    &:hover{
+        box-shadow: none;
+    }
+    &::after{
+        border-radius: 0;
+    }
+}
+@media(max-width: 37.5em){
+    .subcategoria-contenedor{
+        flex-direction: column;
+    }
+    .acciones-subcategoria{
+        margin-bottom: 2rem;
+    }
+}

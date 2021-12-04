@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&family=PT+Sans+Narrow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+/* Universal */
+
+.navegacion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(245, 245, 245);
+    border: rgb(165, 165, 165) .1rem solid;
+    font-family: "Oswald", sans-serif;
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+}
+
+/* Fin de Universal */
+/* Logotipo */
+
+.logo{
+    width: 100%;
+    padding-top: 1rem;
+}
+.contenedor-logo{
+    width: 15%;
+}
+
+/* Fin de Logotipo */
+
+/* Navegacion elementos */
+
+.Navegacion-principal,
+.autenticacion{
+    z-index: 1000;
+    flex-basis: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    transition: .5s;
+}
+
+ion-icon{
+    font-size: 5rem;
+}
+.enlace p{
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+}
+.Navegador{
+    position: relative;
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 1rem 3rem;
+    margin: 0 2rem;
+    border: pink .1rem solid;
+    z-index: 5;
+    transition: .3s;
+    &::before{
+        transition: height .5s .2s, width .2s;
+        z-index: -1;
+        position: absolute;
+        content: "";
+        background-color: pink;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0%;
+        height: 0%;
+    }
+    &:hover{
+        color: rgb(255, 109, 133);
+    }
+    &:hover span{
+        color: white;
+    }
+    &:hover::before{
+        width: 100%;
+        height: 100%;
+    }
+}
+.cantidad-compras{
+    position: absolute;
+    top: 5%;
+    color: white;
+    right: 20%;
+    background-color: rgb(255, 143, 39);
+    border-radius: 50%;
+    padding: 0 .8rem;
+}
+/* Fin de Navegacion elementos */
+
+/* Inicio menu hamburguesa */
+
+.menu-hamburguesa{
+    position: relative;
+    margin-top: -2rem;
+    width: 4rem;
+    height: 3px;
+    background-color: #333;
+    display: inline-block;
+    &::before{
+        top: -.8rem;
+        content: "";
+        position: absolute;
+        left: 0;
+        transition: all .2s;
+        width: 4rem;
+        height: 3px;
+        background-color: #333;
+        display: inline-block;
+    }
+    &::after{
+        top: .8rem;
+        content: "";
+        position: absolute;
+        left: 0;
+        transition: all .2s;
+        width: 4rem;
+        height: 3px;
+        background-color: #333;
+        display: inline-block;
+    }
+}
+.menu-hamburguesa-contenedor{
+    margin-right: 3rem;
+    visibility: hidden;
+    display: none;
+    position: absolute;
+}
+
+/* Fin menu hamburguesa */
+
+/* Clases de animacion */
+
+.abierto{
+    background-color: transparent;
+}
+.abierto::after{
+    transform: rotate(135deg);
+    top: 0;
+}
+.abierto::before{
+    transform: rotate(-135deg);
+    top: 0;
+}
+
+.difuminador{
+    display: none;
+    top: 0;
+    left: 0;
+    width: 0vw;
+    height: 0vh;
+    position: fixed;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.308);
+    z-index: 4;
+}
+
+.difuminador-activo{
+    width: 100vw;
+    height: 100vh;
+}
+
+.activo-2{
+    left: 0 !important;
+}
+.activo{
+    left: 50% !important;
+}
+
+/* Fin clases de animacion */
+
+/* Inicio Media queries */
+
+@media(max-width: 68.75em){
+    .Navegacion-principal,
+    .autenticacion{
+        display: block;
+        position: fixed;
+        visibility: visible;
+        width: 50%;
+    }
+    .cantidad-compras{
+        top: 5%;
+        right: 40%;
+    }
+    .Navegador{
+        margin: 0;
+    }
+    .Navegacion-principal{
+        top: 20%;
+        left: -51%;
+    }
+    .autenticacion{
+        top: 20%;
+        left: 101%;
+    }
+    .menu-hamburguesa-contenedor{
+        display: block;
+        visibility: visible;
+        position: relative;
+    }
+    .contenedor-logo{
+        margin-left: 2rem;
+    }
+    .difuminador{
+        display: block;
+    }
+}
+@media(max-width: 37.5em){
+    .contenedor-logo{
+        width: 30%;
+        margin-left: 2rem;
+    }
+    .cantidad-compras{
+        top: 5%;
+        right: 30%;
+    }
+}
+
+/* Fin media queries*/

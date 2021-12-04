@@ -1,0 +1,60 @@
+.productosPopulares-contenedor{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 3rem;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+}
+@media(max-width: 68.75em){
+    .productosPopulares-contenedor{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media(max-width: 52.25em){
+    .productosPopulares-contenedor{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media(max-width: 34.375em){
+    .productosPopulares-contenedor{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+.imagen-producto{
+    width: 100%;
+}
+.nombreProducto{
+    margin: 0;
+    font-family: "Oswald", sans-serif;
+    font-size: 2.2rem;
+}
+.codigoProducto{
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+    margin: 0;
+    font-weight: 700;
+}
+.producto{
+    text-align: center;
+    border: rgb(187, 187, 187) solid 1px;
+    background-color: #fff5f7;
+    height: 100%;
+}
+.precioProducto{
+    font-size: 3rem;
+    margin: 1rem 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+}
+.producto-datos-column{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.abajo{
+    align-items: flex-end;
+}

@@ -1,0 +1,76 @@
+/* Universales */
+
+.contenedor-caracteristicas{
+    display: flex;
+    justify-content: space-between;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    z-index: 1;
+    padding: 8rem 0;
+}
+ 
+/* Fin de Universales */
+
+/* Caracteristicas */
+.caracteristicas{
+    padding: 2rem;
+    margin: 0 4rem;
+    text-align: center;
+    z-index: -2;
+    border-radius: 5%;
+    box-shadow: 1px 4px 32px -16px rgba(0,0,0,0.75);
+    transition: .5s;
+    &:hover{
+        transform: translateY(-1rem) scale(1.05);
+    }
+}
+.caracteristicas p{
+    font-size: 1.8rem;
+    margin-bottom: 4rem;
+    font-family: "Roboto", sans-serif;
+}
+.caracteristicas h2{
+    font-family: "Oswald", sans-serif;
+    margin-top: 0;
+    font-size: 2.6rem;
+}
+.caracteristicas-oro{
+    background-color: rgb(255, 206, 100);
+}
+.caracteristicas-oro ion-icon{
+    color: rgb(255, 153, 0);
+    font-size: 7rem;
+}
+.caracteristicas-plata{
+    background-color: rgb(243, 243, 243);
+}
+.caracteristicas-plata ion-icon{
+    color: rgb(177, 177, 177);
+    font-size: 7rem;
+}
+.caracteristicas-catalogo{
+    background-color: pink;
+}
+.caracteristicas-catalogo ion-icon{
+    color: rgb(255, 122, 144);
+    font-size: 7rem;
+}
+.titulo-caracteristicas{
+    font-size: 4rem;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+}
+/* Fin de Caracteristicas */
+
+/* Media Queries */
+@media(max-width: 62.5em){
+    .contenedor-caracteristicas{
+        flex-direction: column;
+    }
+    .caracteristicas{
+        margin-bottom: 4rem;
+    }
+}

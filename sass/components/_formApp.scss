@@ -1,0 +1,108 @@
+.formar{
+    z-index: 21;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    transition: .7s ease;
+}
+.form{
+    display: flex;
+    height: 100vh;
+    overflow-y: scroll;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.356);
+    flex-direction: column;
+    backdrop-filter: blur(15px);
+    padding: 4rem;
+    background-color: rgba(255, 255, 255, 0.376);
+    border: solid 1px whitesmoke;
+    width: 50vw;
+    @media(max-width: 56.25em){
+        width: 75vw;
+    }
+    @media(max-width: 37.5em){
+        width: 100vw;
+        height: 100%;
+    }
+}
+.input-app{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    font-family: "Oswald", sans-serif;
+}
+.info-cliente{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    margin: 2rem 0;
+}
+.info-cliente-contenedor{
+    background-color: rgb(255, 204, 204);
+    align-items: center;
+    margin: 0;
+    border: .1rem solid pink;
+    padding: .5rem;
+}
+.input-app label{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: brightness(60%) blur(10px);
+}
+.hiddenFill{
+    display: none;
+}
+.input-app-campo{
+    font-size: 2rem;
+    padding: .4rem 1rem;
+    border-radius: 5rem;
+    outline: none;
+    border: .1rem solid pink;
+}
+.input-app-checkbox{
+    font-size: 2rem;
+}
+.acciones{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+}
+.hiddenForm{
+    left: -100% !important;
+}
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-input::before {
+    content: 'Seleccionar foto o captura';
+    display: inline-block;
+    background: whitesmoke;
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+  .custom-file-input:hover::before {
+    border-color: black;
+  }
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }

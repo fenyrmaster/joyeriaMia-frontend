@@ -1,0 +1,78 @@
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(255, 98, 124);
+    color: white;
+}
+.logotipo{
+    width: 15%;
+    padding: 2rem 0;
+    border-bottom: white solid .1rem;
+}
+.h3-info{
+    font-family: "Oswald", sans-serif;
+    font-size: 3rem;
+    margin-bottom: .5rem;
+}
+.enlaces{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    border-bottom: .1rem solid white;
+}
+.enlaces-footer-enlace{
+    display: flex;
+    align-items: center;
+}
+.enlaces-footer-enlace:last-of-type{
+    align-items: flex-start;
+    margin-top: 1.5rem;
+}
+.primero{
+    margin-top: 0;
+}
+.texto-info{
+    margin-left: 1rem;
+}
+.enlaces-footer-enlace ion-icon{
+    font-size: 3rem;
+}
+.enlaces-cuenta{
+    display: flex;
+    flex-direction: column;
+}
+.enlace-cuenta{
+    margin: 1rem 0;
+    &:hover{
+        color: black;
+    }
+}
+.copy-texto{
+    font-size: 1.8rem;
+    padding: 2rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+@media(max-width: 68.75em){
+    .logotipo{
+        width: 25%;
+    }
+}
+@media(max-width: 37.5em){
+    .logotipo{
+        width: 35%;
+    }
+    .enlaces{
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .enlaces-footer-enlace{
+        justify-content: center;
+    }
+}

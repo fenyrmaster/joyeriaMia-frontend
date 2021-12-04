@@ -1,0 +1,22 @@
+.mejores-productos{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2rem 0;
+}
+.mejores-productos-boton{
+    font-size: 4rem;
+    font-family: "Oswald", sans-serif;
+    padding: 1rem 2rem;
+    border: pink 1px solid;
+    background-color: white;
+    transition: .6s;
+}
+.mejores-activo{
+    background-color: rgb(255, 101, 127);
+    color: white;
+}
+@media(max-width: 37.5em){
+    .mejores-productos{
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,85 @@
+.producto-titulo{
+    font-family: "Oswald", sans-serif;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+.datos-producto{
+    font-size: 1.8rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    margin: 0;
+}
+.producto-nota{
+    font-size: 2rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    padding: 1.5rem;
+    background-color: pink;
+}
+.detalles-contenedor{
+    margin-right: 2rem;
+}
+.precio{
+    font-size: 4rem;
+    margin: 0 0 1rem 0;
+    font-family: "Oswald", sans-serif;
+    color: rgb(0, 0, 0);
+}
+.carrito-producto{
+    font-size: 2rem;
+    font-family: "Oswald", sans-serif;
+    display: flex;
+    align-items: center;
+    transition: .3s;
+    border-radius: 2rem;
+    background-color: rgb(255, 227, 232);
+    border: .1rem solid rgb(255, 174, 187);
+    &:hover{
+        background-color: rgb(255, 113, 136);
+        color: white;
+    }
+}
+.precioAnterior{
+    font-family: "Oswald", sans-serif;
+    margin: 0;
+    text-decoration: line-through;
+    font-size: 1.3rem;
+}
+.precioDescontado{
+    margin-top: 0;
+}
+.carrito-producto p{
+    margin-left: 1rem;
+}
+.caracteristicas-producto{
+    margin-top: 3rem;
+}
+.caracteristica-producto{
+    font-size: 2rem;
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem;
+    margin: 1rem 0;
+    background-color: rgb(216, 216, 216);
+    border: .1rem solid grey;
+}
+.caracteristica-producto:first-of-type ion-icon{
+    color: rgb(69, 128, 255);
+}
+.caracteristica-producto:nth-child(2) ion-icon{
+    color: rgb(1, 189, 1);
+}
+.caracteristica-producto:last-of-type ion-icon{
+    color: rgb(211, 179, 0);
+}
+.caracteristica-producto p{
+    margin-left: 1rem;
+}
+
+@media(max-width: 37.5em){
+    .caracteristica-producto{
+        flex-direction: column;
+        text-align: center;
+    }
+}

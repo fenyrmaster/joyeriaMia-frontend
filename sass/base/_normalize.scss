@@ -1,0 +1,25 @@
+body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+    font-family: "PT Sans", sans-serif;
+  }
+  
+  html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+  *::selection{
+    color: white;
+    background-color: rgb(255, 130, 151);
+  }

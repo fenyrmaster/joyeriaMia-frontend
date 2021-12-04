@@ -1,0 +1,138 @@
+.iniciar-sesion-contenedor{
+    height: 80vh;
+    background-color: whitesmoke;
+    font-family: "Roboto", sans-serif;
+}
+.iniciar-sesion-fondo{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.iniciar-sesion-fondo-2{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+    background-color: rgb(255, 222, 227);
+    border-radius: 0 2rem 2rem 0;
+    border: .1rem solid rgb(238, 107, 255);
+}
+.iniciar-sesion-fondo img{
+    width: 40%;
+    margin: 2rem 0;
+    margin-left: 1rem;
+    object-fit: cover;
+}
+.carrito-menos{
+    width: 6rem;
+}
+.temporal img{
+    height: 100%;
+    object-fit: contain;
+}
+.domicilio{
+    align-items: flex-start;
+}
+.no-margin{
+    margin: 1rem 0;
+}
+.opciones-envio{
+    margin: 0;
+}
+.eliminado{
+    justify-content: space-between;
+}
+.datos-login{
+    margin: 0 2rem;
+}
+.margin-casi{
+    margin: 0;
+}
+.h1acceso{
+    font-size: 3rem;
+    font-family: "Oswald", sans-serif;
+}
+.texto-acceso{
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+.input-label{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+.input-label label{
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+.input-label input{
+    background-color: rgb(255, 240, 248);
+    border: .1rem solid rgb(255, 103, 212);
+    font-size: 2rem;
+    padding: .8rem 1rem;
+}
+.input-label input::-webkit-outer-spin-button,
+.input-label input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.registro{
+    height: auto;
+    padding: 10rem 0;
+}
+.redireccion{
+    background-color: white;
+    border-radius: 2rem;
+    &:hover{
+        color: rgb(181, 136, 163);
+    }
+}
+.producto-no{
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    font-size: 1.9rem;
+    padding: 2rem;
+    background-color: rgb(255, 207, 207);
+}
+.producto-nohay{
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 2.3rem;
+}
+.no-disponible{
+    padding: 2rem;
+    font-family: "Roboto", sans-serif;
+    background-color: rgb(255, 101, 101);
+    color: white;
+}
+.eliminardecarrito{
+    font-family: "Oswald", sans-serif;
+    font-size: 1.6rem;
+    background-color: rgb(255, 188, 188);
+    color: black;
+    border: .1rem solid rgb(255, 107, 132);
+    transition: .3s ease all;
+    &:hover{
+        color: white;
+        background-color: rgb(255, 88, 88);
+    }
+}
+@media(max-width: 75em){
+    .iniciar-sesion-fondo-2{
+        width: 60%;
+    }
+}
+@media(max-width: 53.125em){
+    .iniciar-sesion-fondo-2{
+        width: 90%;
+    }
+}
+@media(max-width: 37.5em){
+    .iniciar-sesion-fondo img{
+        display: none;
+    }
+    .iniciar-sesion-fondo-2{
+        border-radius: 2rem;
+    }
+}
