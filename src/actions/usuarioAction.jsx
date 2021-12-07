@@ -13,7 +13,7 @@ export function crearNuevoUsuario(datos, history) {
             history.push("/tienda");
             Swal.fire(
                 'Registro completado!',
-                'Enviamos un correo de confirmacion, no olvides checar tu spam si no ves nuestro correo',
+                'Enviamos un correo de confirmacion, no olvides checar tu spam si no ves nuestro correo, si estas en un dispositivo Apple, es posible que no funcione, en tal caso, accede desde un dispositivo android o windows',
                 'success'
             )
         }catch(error){
@@ -38,7 +38,7 @@ export function accederLogin(datos, history) {
             history.push("/tienda");
             Swal.fire(
                 'Accedido!',
-                'Has accedido a tu cuenta',
+                'Has accedido a tu cuenta, si estas en un dispositivo Apple, es posible que no funcione, en tal caso, accede desde un dispositivo android o windows',
                 'success'
               )
         }catch(error){
