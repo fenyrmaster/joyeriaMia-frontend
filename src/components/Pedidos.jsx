@@ -77,7 +77,7 @@ const Pedidos = () => {
                             { (pedidos.length !== 0 && usuario && usuario.rol === "cliente") ? pedidos.map(pedido => <Pedido pedido={pedido} key={pedido._id}/>) : null }
                             { (pedidos.length === 0 && usuario && usuario.rol === "cliente") ? <p className="producto-no">No hay pedidos</p> : null }
                             { (pedidosAdmin.length === 0 && usuario && usuario.rol === "admin") ? <p className="producto-no">No hay pedidos</p> : null }
-                            { (pedidosAdmin.length !== 0 && usuario && usuario.rol === "admin") ? pedidosAdmin.map(pedido => <PedidoAdmin pedido={pedido} key={pedido._id}/>) : null }
+                            { (pedidosAdmin.length !== 0 && usuario && usuario.rol === "admin") ? pedidosAdmin.map(pedido => <PedidoAdmin pedido={pedido} guardarPagina={guardarPagina} key={pedido._id}/>) : null }
                         </Fragment>
                     }
                     {(usuario && usuario.rol === "cliente")

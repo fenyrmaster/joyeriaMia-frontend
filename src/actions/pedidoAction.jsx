@@ -19,6 +19,26 @@ export function crearPedido(id, history) {
         }
     }
 }
+
+export function eliminarPedido(codigo, guardarPagina){
+    return async(dispatch) => {
+        try{
+            let token = Cookies.get("jwt2")
+            await clienteAxios.delete(`/api/pedidos/eliminarPedido/${codigo}?jwt=${token}`);
+            Swal.fire(
+                'Pedido Eliminado!',
+                'Se ha eliminado el pedido',
+                'success'
+            )
+            guardarPagina(1);
+            const pedidos = await clienteAxios.get(`/api/pedidos?sort=-createdAt&limit=2&page=1&jwt=${token}`);
+            dispatch(obtenerPedidoAdmin(pedidos.data));
+        }catch(error){
+            console.log(error.response);
+        }
+    }
+}
+
 export function obtenerPedidosAPI(id, pagina){
     return async(dispatch) => {
         dispatch(ponerSpinner());
