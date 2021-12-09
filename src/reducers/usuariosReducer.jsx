@@ -6,7 +6,8 @@ const initialState = {
     autenticado: false,
     cargando: true,
     cargaSpinner: false,
-    tarjeta: null
+    tarjeta: null,
+    admin: false
 }
 
 export default function(state = initialState, action){
@@ -35,6 +36,7 @@ export default function(state = initialState, action){
                 cargaSpinner: false,
                 cargando: false,
                 autenticado: true,
+                admin: (action.payload.data.user.rol === "admin") ? true : false,
                 tarjeta: action.payload.tarjeta
             }
         case CAMBIAR_CONTRASEÑA_EXITO:
@@ -56,7 +58,8 @@ export default function(state = initialState, action){
                 usuario: null,
                 token: null,
                 autenticado: false,
-                cargando: false
+                cargando: false,
+                admin: false
             }
         case CAMBIAR_DATOS_PERSONALES_EXITO:
             return{

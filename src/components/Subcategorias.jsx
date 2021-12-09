@@ -22,9 +22,11 @@ const Subcategorias = () => {
         nombre: "",
         medidas: "",
     });
+    const [ cargarCreacion, guardarcargarCreacion ] = useState(false);
+    const [ cargarEdicion, guardarcargarEdicion ] = useState(false);
     const crearSubcategoria = e => {
         e.preventDefault();
-        dispatch(crearSub(subCrear, guardarFormCrear, guardarSubCrear));
+        dispatch(crearSub(subCrear, guardarFormCrear, guardarSubCrear, guardarcargarCreacion));
     }
     useEffect(() => {
         dispatch(obtenerSubAdmin());
@@ -72,7 +74,7 @@ const Subcategorias = () => {
     }
     const editarSubcategoria = e =>{
         e.preventDefault();
-        dispatch(editarSub(subEditarForm, subEditar._id, guardarFormEditar, guardarSubEditar))
+        dispatch(editarSub(subEditarForm, subEditar._id, guardarFormEditar, guardarSubEditar, guardarcargarEdicion))
     }
 
     return(
@@ -84,11 +86,11 @@ const Subcategorias = () => {
                     <input required value={subCrear.nombre} onChange={(e) => guardarSubCrear({...subCrear, [e.target.name]: e.target.value})} name="nombre" className="input-app-campo" type="text" id="nombre"/>
                 </div>
                 <div className="input-app">
-                    <label htmlFor="nombre">Medidas(tallas):</label>
+                    <label htmlFor="nombre">Medidas(tallas, separadas por comas, ejemplo: "5,5.5,6,6.5"):</label>
                     <input required value={subCrear.medidas} onChange={(e) => guardarSubCrear({...subCrear, [e.target.name]: e.target.value})} name="medidas" className="input-app-campo" type="text" id="nombre"/>
                 </div>
                 <div className="acciones">
-                    <button className="btn btn-pink" type="submit"><span className="btn-texto">Crear</span></button>
+                    { cargarCreacion ? <button disabled className="btn btn-pink" type="submit"><span className="btn-texto">Creando...</span></button> : <button className="btn btn-pink" type="submit"><span className="btn-texto">Crear</span></button> }
                     <button onClick={() => guardarFormCrear(false)} className="btn btn-orange" type="button"><span className="btn-texto">Cancelar</span></button>
                 </div>
             </form>
@@ -98,11 +100,11 @@ const Subcategorias = () => {
                     <input required value={subEditarForm.nombre} onChange={(e) => guardarSubEditar({...subEditarForm, [e.target.name]: e.target.value})} name="nombre" className="input-app-campo" type="text" id="nombre"/>
                 </div>
                 <div className="input-app">
-                    <label htmlFor="nombre">Medidas(tallas):</label>
+                    <label htmlFor="nombre">Medidas(tallas, separadas por comas, ejemplo: "5,5.5,6,6.5"):</label>
                     <input required value={subEditarForm.medidas} onChange={(e) => guardarSubEditar({...subEditarForm, [e.target.name]: e.target.value})} name="medidas" className="input-app-campo" type="text" id="nombre"/>
                 </div>
                 <div className="acciones">
-                    <button className="btn btn-pink" type="submit"><span className="btn-texto">Editar</span></button>
+                    { cargarEdicion ? <button disabled className="btn btn-pink" type="submit"><span className="btn-texto">Editando...</span></button> : <button className="btn btn-pink" type="submit"><span className="btn-texto">Editar</span></button> }
                     <button onClick={() => cancelarEdicion()} className="btn btn-orange" type="button"><span className="btn-texto">Cancelar</span></button>
                 </div>
             </form>

@@ -1,12 +1,14 @@
 import clienteAxios from "../config/axios";
 import { CARGANDO, CARGANDO_COMPLETO, OBTENER_PRODUCTO, EDITAR_PRODUCTO_CANCELAR, EDITAR_PRODUCTO_PREGUNTA, EDITAR_PRODUCTO_EDITAR, ELIMINAR_PRODUCTO_PREGUNTA, ELIMINAR_PRODUCTO_CANCELAR, ELIMINAR_PRODUCTO_BORRAR ,OBTENER_PRODUCTOS_ADMIN, AGREGAR_PROMOCION_PREGUNTA, AGREGAR_PROMOCION_CANCELAR, AGREGAR_PROMOCION_AGREGAR, OBTENER_PRODUCTOS } from "../types/typesProductos";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 export function crearProducto(datos, formDatos, guardarFormDatos, guardarCargando) {
     return async(dispatch) => {
         try{
             guardarCargando(true);
-            await clienteAxios.post("/api/productos", datos);
+            let token = Cookies.get("jwt2")
+            await clienteAxios.post(`/api/productos?jwt=${token}`, datos);
             Swal.fire(
                 'Creado!',
                 'Producto creado',
@@ -118,10 +120,12 @@ export function cancelarPromocionForm() {
         dispatch(productoPromocionCancelar());
     }
 }
-export function agregarPromocionAPI(datos, id, guardarFormPromocion) {
+export function agregarPromocionAPI(datos, id, guardarFormPromocion, guardarcargandoPromo) {
     return async(dispatch) => {
         try{
-            const producto = await clienteAxios.patch(`/api/productos/promocion/${id}`, datos);
+            guardarcargandoPromo(true);
+            let token = Cookies.get("jwt2")
+            const producto = await clienteAxios.patch(`/api/productos/promocion/${id}?jwt=${token}`, datos);
             dispatch(productoPromocion(producto.data.data.doc));
             guardarFormPromocion(false);
             Swal.fire(
@@ -129,7 +133,9 @@ export function agregarPromocionAPI(datos, id, guardarFormPromocion) {
                 'Promocion Actualizada',
                 'success'
             )
+            guardarcargandoPromo(false);
         }catch(error){
+            guardarcargandoPromo(false);
             console.log(error.response);
         }
     }
@@ -137,10 +143,10 @@ export function agregarPromocionAPI(datos, id, guardarFormPromocion) {
 export function eliminarProducto(datos, pagina, filtro) {
     return async(dispatch) => {
         try{
-            await clienteAxios.delete(`/api/productos/${datos._id}`);
+            let token = Cookies.get("jwt2")
+            await clienteAxios.delete(`/api/productos/${datos._id}?jwt=${token}`);
             dispatch(eliminarProductoRe(datos));
             if(filtro.tipo === "Catalogo"){
-                console.log("este se ejecuta 1");
                 const productos = await clienteAxios.get(`/api/productos?page=${pagina}&limit=6&sort=precio&tipo=${filtro.tipo}`);
                 dispatch(productosTodosAdmin(productos.data));
             } else if(filtro.subcategoria === "" && filtro.tipo !== "Catalogo"){
@@ -160,10 +166,12 @@ export function eliminarProducto(datos, pagina, filtro) {
         }
     }
 }
-export function editarProductoAPI(datos, id, pagina, filtro, guardarFormDatos, formDatos, guardarFormEditar) {
+export function editarProductoAPI(datos, id, pagina, filtro, guardarFormDatos, formDatos, guardarFormEditar, guardarcargandoEdicion) {
     return async(dispatch) => {
         try{
-            const producto = await clienteAxios.patch(`/api/productos/${id}`, datos);
+            guardarcargandoEdicion(true);
+            let token = Cookies.get("jwt2")
+            const producto = await clienteAxios.patch(`/api/productos/${id}?jwt=${token}`, datos);
             dispatch(editarProductosRE(producto.data.data.doc));
             if(datos.subcategoria !== ""){
                 if(filtro.tipo === "Catalogo"){
@@ -192,7 +200,9 @@ export function editarProductoAPI(datos, id, pagina, filtro, guardarFormDatos, f
                 imagenes: []
             })
             guardarFormEditar(false);
+            guardarcargandoEdicion(false);
         } catch(error){
+            guardarcargandoEdicion(false);
             console.log(error.response);
         }
     }

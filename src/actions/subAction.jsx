@@ -1,11 +1,14 @@
 import clienteAxios from "../config/axios";
 import { CREAR_SUB_EXITO, CREAR_SUB_FALLO, ELIMINAR_SUB_CANCELAR, ELIMINAR_SUB_PREGUNTA, ELIMINAR_SUB_BORRAR, EDITAR_SUB_PREGUNTA, EDITAR_SUB_CANCELAR, EDITAR_SUB_EDITAR, OBTENER_SUB_ADMIN, OBTENER_SUB } from "../types/typesSub";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
-export function crearSub(datos, guardarFormCrear, guardarSubCrear) {
+export function crearSub(datos, guardarFormCrear, guardarSubCrear, guardarcargarCreacion) {
     return async(dispatch) => {
         try{
-            const subcategoria = await clienteAxios.post("/api/subcategorias", datos);
+            guardarcargarCreacion(true);
+            let token = Cookies.get("jwt2")
+            const subcategoria = await clienteAxios.post(`/api/subcategorias?jwt=${token}`, datos);
             dispatch(subCrear(subcategoria.data.data.newSubcategoria));
             guardarFormCrear(false);
             guardarSubCrear({...datos, nombre: "", centimetros: "", medidas: ""})
@@ -13,16 +16,20 @@ export function crearSub(datos, guardarFormCrear, guardarSubCrear) {
                 'Creado!',
                 'Subcategoria creada',
                 'success'
-            )
+            );
+            guardarcargarCreacion(false);
         }catch(error){
+            guardarcargarCreacion(false);
             console.log(error.response);
         }
     }
 }
-export function editarSub(datos, id, guardarFormEditar, guardarSubEditar) {
+export function editarSub(datos, id, guardarFormEditar, guardarSubEditar, guardarcargarEdicion) {
     return async(dispatch) => {
         try{
-            const subcategoria = await clienteAxios.patch(`/api/subcategorias/${id}`, datos);
+            guardarcargarEdicion(true);
+            let token = Cookies.get("jwt2")
+            const subcategoria = await clienteAxios.patch(`/api/subcategorias/${id}?jwt=${token}`, datos);
             dispatch(subEditar(subcategoria.data.data.doc));
             guardarFormEditar(false);
             guardarSubEditar({...datos, nombre: "", centimetros: "", medidas: ""});
@@ -31,8 +38,10 @@ export function editarSub(datos, id, guardarFormEditar, guardarSubEditar) {
                 'Subcategoria editada',
                 'success'
             )
+            guardarcargarEdicion(false);
         }catch(error){
             console.log(error.response);
+            guardarcargarEdicion(false);
         }
     }
 }
@@ -80,7 +89,8 @@ export function cancelarEditado() {
 export function eliminarSub(datos) {
     return async(dispatch) => {
         try{
-            await clienteAxios.delete(`/api/subcategorias/${datos._id}`);
+            let token = Cookies.get("jwt2")
+            await clienteAxios.delete(`/api/subcategorias/${datos._id}?jwt=${token}`);
             dispatch(subBorrar(datos));
             Swal.fire(
                 'Eliminado!',

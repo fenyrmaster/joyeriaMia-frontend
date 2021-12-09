@@ -20,6 +20,8 @@ const AdminProductos = () => {
     const cargando = useSelector(state => state.Producto.cargando);
 
     const [ pagina, guardarPagina ] = useState(1);
+    const [ cargandoEdicion, guardarcargandoEdicion ] = useState(false);
+    const [ cargandoPromo, guardarcargandoPromo ] = useState(false);
     const [ filtros, guardarFiltros ] = useState({
         tipo: "Oro",
         subcategoria: ""
@@ -171,7 +173,7 @@ const AdminProductos = () => {
             dispatch(mostrarAlerta(alerta));
             return;
         }
-        dispatch(agregarPromocionAPI(promocion, productoPromocion._id, guardarFormPromocion));
+        dispatch(agregarPromocionAPI(promocion, productoPromocion._id, guardarFormPromocion, guardarcargandoPromo));
     }
     const editarProducto = e => {
         e.preventDefault();
@@ -192,7 +194,7 @@ const AdminProductos = () => {
             let datos = formDatos.imagenes;
             Array.from(datos).map(el => form.append("imagenes", el));
         }
-        dispatch(editarProductoAPI(form, productoEditar._id, pagina, filtros, guardarFormDatos, formDatos, guardarFormEditar));
+        dispatch(editarProductoAPI(form, productoEditar._id, pagina, filtros, guardarFormDatos, formDatos, guardarFormEditar, guardarcargandoEdicion));
     }
     const subirImagenes = e => {
         guardarFormDatos({...formDatos, imagenes: e.target.files});
@@ -227,7 +229,7 @@ const AdminProductos = () => {
                     <input required onChange={e => guardarPromocion({...promocion, [e.target.name]: e.target.value})} name="promocionFecha" className="input-app-campo" type="date" id="nombre"/>
                 </div>
                 <div className="acciones">
-                    <button className="btn btn-pink" type="submit"><span className="btn-texto">Crear Promocion</span></button>
+                    { cargandoPromo ? <button disabled className="btn btn-pink" type="submit"><span className="btn-texto">Creando Promocion...</span></button> : <button className="btn btn-pink" type="submit"><span className="btn-texto">Crear Promocion</span></button> }
                     <button onClick={() => cancelarPromocion()} className="btn btn-orange" type="button"><span className="btn-texto">Cancelar</span></button>
                 </div>
             </form>
@@ -279,7 +281,7 @@ const AdminProductos = () => {
                     <input onChange={e => subirImagenes(e)} multiple className="input-app-campo custom-file-input" type="file" id="imagenPortada"/>
                 </div>
                 <div className="acciones">
-                    <button className="btn btn-pink" type="submit"><span className="btn-texto">Editar Producto</span></button>
+                    { cargandoEdicion ? <button disabled className="btn btn-pink" type="submit"><span className="btn-texto">Editando...</span></button> : <button className="btn btn-pink" type="submit"><span className="btn-texto">Editar Producto</span></button> }
                     <button onClick={() => cancelarProductoEd()} className="btn btn-orange" type="button"><span className="btn-texto">Cancelar</span></button>
                 </div>
             </form>

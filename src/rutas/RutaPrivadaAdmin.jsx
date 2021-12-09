@@ -16,7 +16,7 @@ const RutaPrivadaAdmin = ({ component: Component, ...props }) => {
     }, [])
 
     return(
-        <Route {...props} render={props => !datos.cargando && (datos.usuario.rol !== "admin") ? (<Redirect to="/tienda"/>) : (<Component {...props}/>)}/>
+        <Route {...props} render={props => !datos.cargando && !datos.admin ? (<Redirect to="/tienda"/>) : (<Component {...props}/>)}/>
     );
 }
 

@@ -1,7 +1,9 @@
 import { QUITAR_SPINNER, CARGAR_SPINNER, CALCULAR_TOTAL, AGREGAR_CARRITO, CREAR_USUARIO_EXITO, CREAR_USUARIO_FALLO, CAMBIAR_CONTRASEÑA_EXITO, CAMBIAR_CONTRASEÑA_FALLO, CAMBIAR_DATOS_PERSONALES_EXITO, CAMBIAR_DATOS_PERSONALES_FALLO, LOGIN_EXITO, LOGIN_FALLO, COMENZAR_BUSQUEDA, RECORDAR_USUARIO_EXITO, RECORDAR_USUARIO_FALLO, SALIR_CUENTA, CAMBIAR_ENVIO } from "../types/typesUsuario";
 import clienteAxios from '../config/axios';
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 import { loadStripe } from "@stripe/stripe-js";
+import { concatSeries } from "async";
 
 export function crearNuevoUsuario(datos, history) {
     return async(dispatch) => {
@@ -10,10 +12,11 @@ export function crearNuevoUsuario(datos, history) {
         try{
             const usuario = await clienteAxios.post("/api/usuarios/signup", datos);
             dispatch(usuarioExito(usuario.data));
+            crearGalletaCliente(usuario.data.token);
             history.push("/tienda");
             Swal.fire(
                 'Registro completado!',
-                'Enviamos un correo de confirmacion, no olvides checar tu spam si no ves nuestro correo, si estas en un dispositivo Apple, es posible que no funcione, en tal caso, accede desde un dispositivo android o windows',
+                'Enviamos un correo de confirmacion, no olvides checar tu spam si no ves nuestro correo',
                 'success'
             )
         }catch(error){
@@ -35,10 +38,11 @@ export function accederLogin(datos, history) {
         try{
             const usuario = await clienteAxios.post("/api/usuarios/login", datos);
             dispatch(loginExito(usuario.data));
+            crearGalletaCliente(usuario.data.token);
             history.push("/tienda");
             Swal.fire(
                 'Accedido!',
-                'Has accedido a tu cuenta, si estas en un dispositivo Apple, es posible que no funcione, en tal caso, accede desde un dispositivo android o windows',
+                'Has accedido a tu cuenta',
                 'success'
               )
         }catch(error){
@@ -74,7 +78,8 @@ export function cuentaOlvidada(datos, history) {
 export function recuperarContraseña(datos, history, id) {
     return async(dispatch) => {
         try{
-            await clienteAxios.patch(`/api/usuarios/resetPassword/${id}`, datos);
+            const usuario = await clienteAxios.patch(`/api/usuarios/resetPassword/${id}`, datos);
+            crearGalletaCliente(usuario.data.token);
             history.push("/");
             Swal.fire(
                 'Restablecido!',
@@ -95,7 +100,8 @@ export function recordarUsuario(){
     return async(dispatch) => {
         dispatch(busquedaActiva());
         try{
-            const resultado = await clienteAxios("/api/usuarios/remind");
+            let token = Cookies.get("jwt2")
+            const resultado = await clienteAxios(`/api/usuarios/remind?jwt=${token}`);
             dispatch(recordarUsuarioExito(resultado.data));
         } catch(error){
             console.log(error.response);
@@ -107,6 +113,9 @@ export function recordarUsuario(){
 export function salirCuenta(history){
     return async(dispatch) => {
         await clienteAxios("/api/usuarios/logout");
+        if(Cookies.get("jwt2")){
+            Cookies.remove("jwt2");
+        }
         dispatch(salirCuentaToken());
         history.push("/tienda");
         Swal.fire(
@@ -121,7 +130,8 @@ export function cambiarDatosPersonal(datos){
     return async(dispatch) => {
         dispatch(busquedaActiva());
         try{
-            const usuario = await clienteAxios.patch("/api/usuarios/updateData", datos);
+            let token = Cookies.get("jwt2");
+            const usuario = await clienteAxios.patch(`/api/usuarios/updateData?jwt=${token}`, datos);
             dispatch(datosPersonalesExito(usuario.data));
             Swal.fire(
                 'Datos cambiados!',
@@ -142,11 +152,13 @@ export function cambiarContraseña(datos, guardarDatosContraseña){
     return async(dispatch) => {
         dispatch(busquedaActiva());
         try{
-            const usuario = await clienteAxios.patch("/api/usuarios/updatePassword/me", datos);
+            let token = Cookies.get("jwt2");
+            const usuario = await clienteAxios.patch(`/api/usuarios/updatePassword/me?jwt=${token}`, datos);
+            crearGalletaCliente(usuario.data.token);
             dispatch(datosContraseñaExito(usuario.data));
             Swal.fire(
                 'Datos cambiados!',
-                'Hemos actualizado la contraseña',
+                'Hemos actualizado su contraseña',
                 'success'
             );
             guardarDatosContraseña({
@@ -168,7 +180,8 @@ export function agregarCarro(productoId, auth){
     return async(dispatch) => {
         if(auth){
             try{
-                const usuario = await clienteAxios.post("/api/usuarios/carritoAgregar", {productoId: productoId});
+                let token = Cookies.get("jwt2")
+                const usuario = await clienteAxios.post(`/api/usuarios/carritoAgregar?jwt=${token}`, {productoId: productoId});
                 dispatch(actualizarUsuario(usuario.data));
                 Swal.fire(
                     "Correcto",
@@ -194,14 +207,15 @@ export function agregarCarro(productoId, auth){
 export function eliminarCarro(id){
     return async(dispatch) => {
         try{
-            const usuario = await clienteAxios.patch("/api/usuarios/carritoEliminar", {id: id});
+            let token = Cookies.get("jwt2")
+            const usuario = await clienteAxios.patch(`/api/usuarios/carritoEliminar?jwt=${token}`, {id: id});
             dispatch(actualizarUsuario(usuario.data));
             Swal.fire(
                 "Correcto",
                 "Producto eliminado del carrito con exito",
                 "success"
             )
-            const usuarioTotal = await clienteAxios.get("/api/usuarios/obtenerTotal");
+            const usuarioTotal = await clienteAxios.get(`/api/usuarios/obtenerTotal?jwt=${token}`);
             dispatch(calcularTodo(usuarioTotal.data));
         } catch(error){
             console.log(error.response);
@@ -216,7 +230,8 @@ export function eliminarCarro(id){
 export function cambiarEnvioAPI(envio){
     return async(dispatch) => {
         try{
-            const usuario = await clienteAxios.patch("/api/usuarios/envioCambiar", {envio: envio});
+            let token = Cookies.get("jwt2")
+            const usuario = await clienteAxios.patch(`/api/usuarios/envioCambiar?jwt=${token}`, {envio: envio});
             dispatch(cambiarEnvioOp(usuario.data));
         } catch(error){
             console.log(error.response);
@@ -226,7 +241,8 @@ export function cambiarEnvioAPI(envio){
 export function cambiarMetodoAPI(metodoPago){
     return async(dispatch) => {
         try{
-            const usuario = await clienteAxios.patch("/api/usuarios/metodoCambiar", {metodoPago: metodoPago});
+            let token = Cookies.get("jwt2")
+            const usuario = await clienteAxios.patch(`/api/usuarios/metodoCambiar?jwt=${token}`, {metodoPago: metodoPago});
             dispatch(cambiarEnvioOp(usuario.data));
         } catch(error){
             console.log(error.response);
@@ -255,7 +271,8 @@ export function confirmarUsuario(token, history){
 export function cambiarMedidasAPI(medida, id){
     return async(dispatch) => {
         try{
-            const usuario = await clienteAxios.patch("/api/usuarios/medidasCambiar", {medida: medida, id: id});
+            let token = Cookies.get("jwt2")
+            const usuario = await clienteAxios.patch(`/api/usuarios/medidasCambiar?jwt=${token}`, {medida: medida, id: id});
             dispatch(cambiarEnvioOp(usuario.data));
         } catch(error){
             console.log(error.response);
@@ -265,9 +282,10 @@ export function cambiarMedidasAPI(medida, id){
 export function cambiarCantidadAPI(cantidad, id){
     return async(dispatch) => {
         try{
-            const usuario = await clienteAxios.patch("/api/usuarios/cantidadCambiar", {cantidad: cantidad, id: id});
+            let token = Cookies.get("jwt2")
+            const usuario = await clienteAxios.patch(`/api/usuarios/cantidadCambiar?jwt=${token}`, {cantidad: cantidad, id: id});
             dispatch(cambiarEnvioOp(usuario.data));
-            const usuarioTotal = await clienteAxios.get("/api/usuarios/obtenerTotal");
+            const usuarioTotal = await clienteAxios.get(`/api/usuarios/obtenerTotal?jwt=${token}`);
             dispatch(calcularTodo(usuarioTotal.data));
         } catch(error){
             console.log(error.response);
@@ -277,7 +295,8 @@ export function cambiarCantidadAPI(cantidad, id){
 export function calcularTotalAPI(){
     return async(dispatch) => {
         try{
-            const usuario = await clienteAxios.get("/api/usuarios/obtenerTotal");
+            let token = Cookies.get("jwt2")
+            const usuario = await clienteAxios.get(`/api/usuarios/obtenerTotal?jwt=${token}`);
             dispatch(calcularTodo(usuario.data));
         } catch(error){
             console.log(error.response);
@@ -298,6 +317,11 @@ export function calcularTotalAPI(){
 //        }
 //    }
 //}
+
+const crearGalletaCliente = token => {
+    console.log("se creo");
+    Cookies.set("jwt2", token, { expires: 15 });
+}
 
 const busquedaActiva = () => ({
     type: COMENZAR_BUSQUEDA,

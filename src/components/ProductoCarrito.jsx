@@ -8,6 +8,7 @@ const ProductoCarrito = ({producto}) => {
     const [ cambios, guardarCambios ] = useState(0);
 
     useEffect(() => {
+        console.log(producto);
         if(producto.cantidad !== ""){
             guardarCambios(producto.cantidad);
         } else{
@@ -58,7 +59,7 @@ const ProductoCarrito = ({producto}) => {
                         <select defaultValue={producto.talla} onChange={e => cambiarMedidas(e.target.value, producto._id)} className="select-carrito" id="cantidad">
                             <option value="0">0</option>
                             { (producto.producto.tipo !== "Catalogo")
-                            ? <Fragment> { producto.producto.subcategoria.medidas.includes(",") ? producto.producto.subcategoria.medidas.split(",").map(el => <option value={el} key={el}>{el}</option>) : <option value={producto.producto.subcategoria.medidas}>{producto.producto.subcategoria.medidas}</option> }</Fragment>
+                            ? <Fragment> { (producto.producto.subcategoria !== null) ? producto.producto.subcategoria.medidas.includes(",") ? producto.producto.subcategoria.medidas.split(",").map(el => <option value={el} key={el}>{el}</option>) : <option value={producto.producto.subcategoria.medidas}>{producto.producto.subcategoria.medidas}</option> : <option>No ocupa</option> }</Fragment>
                             : <option>No ocupa</option>}
                         </select>
                     </div>
