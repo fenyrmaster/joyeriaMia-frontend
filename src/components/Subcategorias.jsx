@@ -113,6 +113,7 @@ const Subcategorias = () => {
                 <div className="boton-crear-contenedor">
                     <button className="boton-crear" onClick={() => guardarFormCrear(true)}>Crear Subcategoria</button>
                 </div>
+                <p className="datos-producto peque">Nota: Para eliminar una subcategoria, debes de eliminar o cambiar la subcategoria de los productos que tienen la subcategoria que quieres eliminar</p>
                 { (resultados.length !== 0) ? resultados.map(el => <Subcategoria key={el._id} subcategoria={el} />) : <p className="producto-no">No hay resultados</p> }
             </div>
         </div>

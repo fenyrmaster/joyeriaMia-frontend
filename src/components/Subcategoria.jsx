@@ -22,7 +22,7 @@ const Subcategoria = ({subcategoria}) => {
                 </div>
             </div>
             <div className="acciones-subcategoria">
-                <button onClick={() => subEditarPregunta()} className="btn btn-pink btn-subcategorias" to="/"><span className="btn-texto">Actualizar</span></button>
+                <button onClick={() => subEditarPregunta()} className="btn btn-pink btn-subcategorias" to="/"><span className="btn-texto">Editar</span></button>
                 <button onClick={() => subEliminarPregunta()} className="btn btn-orange btn-subcategorias" to="/"><span className="btn-texto">Eliminar</span></button>
             </div>
         </div>

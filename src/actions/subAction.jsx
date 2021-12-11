@@ -98,7 +98,12 @@ export function eliminarSub(datos) {
                 'success'
             )
         } catch(error){
-            console.log(error.response);
+            dispatch(cancelarEliminar());
+            Swal.fire(
+                'Error!',
+                error.response.data.message,
+                'error'
+            )
         }
     }
 }
