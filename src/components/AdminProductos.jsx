@@ -277,8 +277,8 @@ const AdminProductos = () => {
                     <input onChange={e => obtenerFoto(e)} className="input-app-campo custom-file-input" type="file" id="imagenPortada"/>
                 </div>
                 <div className="input-app">
-                    <label htmlFor="imagenPortada">Imagenes (Aparte de portada):</label>
-                    <input onChange={e => subirImagenes(e)} multiple className="input-app-campo custom-file-input" type="file" id="imagenPortada"/>
+                    <label htmlFor="imagenesAparte">Imagenes (Aparte de portada):</label>
+                    <input onChange={e => subirImagenes(e)} multiple className="input-app-campo custom-file-input" type="file" id="imagenesAparte"/>
                 </div>
                 <div className="acciones">
                     { cargandoEdicion ? <button disabled className="btn btn-pink" type="submit"><span className="btn-texto">Editando...</span></button> : <button className="btn btn-pink" type="submit"><span className="btn-texto">Editar Producto</span></button> }

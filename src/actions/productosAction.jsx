@@ -25,6 +25,8 @@ export function crearProducto(datos, formDatos, guardarFormDatos, guardarCargand
                 imagenes: []
             });
             guardarCargando(false);
+            document.getElementById("imagenPortada").value = null;
+            document.getElementById("imagenesAparte").value = "";
         }catch(error){
             guardarCargando(false);
             console.log(error.response);
@@ -201,6 +203,8 @@ export function editarProductoAPI(datos, id, pagina, filtro, guardarFormDatos, f
             })
             guardarFormEditar(false);
             guardarcargandoEdicion(false);
+            document.getElementById("imagenPortada").value = null;
+            document.getElementById("imagenesAparte").value = "";
         } catch(error){
             guardarcargandoEdicion(false);
             console.log(error.response);
@@ -224,6 +228,8 @@ export function ponerProductosEditar(datos) {
 }
 export function cancelarProductoEditar() {
     return async(dispatch) => {
+        document.getElementById("imagenPortada").value = null;
+        document.getElementById("imagenesAparte").value = "";
         dispatch(cancelarEdicionP());
     }
 }

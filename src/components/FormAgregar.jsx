@@ -132,8 +132,8 @@ const FormAgregar = () => {
                 <input required onChange={e => obtenerFoto(e)} className="input-app-campo custom-file-input" type="file" id="imagenPortada"/>
             </div>
             <div className="input-app">
-                <label htmlFor="imagenPortada">Imagenes (Aparte de portada):</label>
-                <input onChange={e => subirImagenes(e)} multiple className="input-app-campo custom-file-input" type="file" id="imagenPortada"/>
+                <label htmlFor="imagenesAparte">Imagenes (Aparte de portada):</label>
+                <input onChange={e => subirImagenes(e)} multiple className="input-app-campo custom-file-input" type="file" id="imagenesAparte"/>
             </div>
             { cargando 
             ? <button type="submit" disabled className="btn btn-orange detalle"><span className="btn-texto">Creando...</span></button>
