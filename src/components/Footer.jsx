@@ -27,6 +27,18 @@ const Footer = () => {
                             <ion-icon name="mail"></ion-icon>
                             <p className="texto-info">mia07joyeria@gmail.com</p>
                         </div>
+                        <div className="enlaces-footer-enlace enlace-redes">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                            <a href="https://www.facebook.com/" target="_blank" className="texto-info texto-redes">Mia Joyeria</a>
+                        </div>
+                        <div className="enlaces-footer-enlace enlace-redes">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                            <a href="https://www.instagram.com/" target="_blank" className="texto-info texto-redes">Mia Joyeria</a>
+                        </div>
+                        <div className="enlaces-footer-enlace enlace-redes">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                            <a href="https://twitter.com/" target="_blank" className="texto-info texto-redes">Mia Joyeria</a>
+                        </div>
                         <div className="enlaces-footer-enlace">
                             <ion-icon name="time"></ion-icon>
                             <div className="horarios">

@@ -17,12 +17,12 @@ const Pedido = ({pedido}) => {
         : <p className="codigo-pedido">Contactate con nosotros, debes de realizar la transferencia a la tarjeta {tarjeta}</p>
         }
         <p className="codigo-pedido">Codigo de pedido: {pedido.codigo}</p>
+        <p className="codigo-pedido margin-casi">Nuestro Telefono: 3312816322</p>
+        <p className="codigo-pedido margin-casi">Nuestro Correo: mia07joyeria@gmail.com</p>
         <div className="productos-pedido">
             { pedido.carrito.map(producto => <ProductoPedido key={producto._id} producto={producto}/>) }
         </div>
         <p className="total">Total: <span>{pedido.total}$</span></p>
-        <p className="codigo-pedido margin-casi">Telefono: 33 1281 6322</p>
-        <p className="codigo-pedido margin-casi">Correo: mia07joyeria@gmail.com</p>
     </div>
     );
 }

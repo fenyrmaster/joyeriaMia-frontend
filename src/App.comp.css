@@ -987,6 +987,15 @@ ion-icon {
   padding: 1rem 0;
   margin: 0; }
 
+.texto-redes {
+  text-decoration: underline; }
+
+.enlace-redes {
+  margin: 2rem 0; }
+
+.enlace-redes:first-of-type {
+  margin-top: 0; }
+
 .domicilio {
   align-items: flex-start; }
 
@@ -1003,7 +1012,8 @@ ion-icon {
   margin: 0 2rem; }
 
 .margin-casi {
-  margin: 0; }
+  margin: 0;
+  margin-bottom: 1rem; }
 
 .h1acceso {
   font-size: 3rem;
